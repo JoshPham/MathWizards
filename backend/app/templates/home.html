@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>MathWizards Backend</title>
+</head>
+<body>
+    <div>
+        <a href="{% url 'all_grades' %}">Grade</a>
+        <a href="{% url 'all_units' %}">Unit</a>
+        <a href="{% url 'all_lessons' %}">Lesson</a>
+        <a href="{% url 'all_problems' %}">Problem</a>
+    </div>
+</body>
+</html>

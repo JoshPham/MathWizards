@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Lessons</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Go to Home Page</a>
+    <h1>Lessons</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Lesson ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Content</th>
+                <th>Unit</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td>{{ lesson.lesson_id }}</td>
+                    <td>{{ lesson.title }}</td>
+                    <td>{{ lesson.description }}</td>
+                    <td>{{ lesson.content }}</td>
+                    <td>{{ lesson.unit.title }}</td>
+                    <td>{{ lesson.unit.grade.title }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Grades</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Go to Home Page</a>
+    <h1>Grades</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Grade ID</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+                <tr>
+                    <td>{{ grade.grade_id }}</td>
+                    <td>{{ grade.title }}</td>
+                    <td>{{ grade.description }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

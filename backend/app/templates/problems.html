@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Problems</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Go to Home Page</a>
+    <h1>Problems</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Grade</th>
+                <th>Unit</th>
+                <th>Problem ID</th>
+                <th>Text Question</th>
+                <th>Number of Answers</th>
+                <th>Answer A</th>
+                <th>Answer B</th>
+                <th>Answer C</th>
+                <th>Answer D</th>
+                <th>Letter Answer</th>
+                <th>Lesson</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for problem in problems %}
+                <tr>
+                    <td>{{ problem.lesson.unit.grade.title }}</td>
+                    <td>{{ problem.lesson.unit.title }}</td>
+                    <td>{{ problem.id }}</td>
+                    <td>{{ problem.text_question }}</td>
+                    <td>{{ problem.num_answer }}</td>
+                    <td>{{ problem.answer_a }}</td>
+                    <td>{{ problem.answer_b }}</td>
+                    <td>{{ problem.answer_c }}</td>
+                    <td>{{ problem.answer_d }}</td>
+                    <td>{{ problem.letter_answer }}</td>
+                    <td>{{ problem.lesson.title }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
