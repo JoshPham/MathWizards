@@ -57,14 +57,8 @@ class App extends Component {
             <Route path="/about" element={<About />} />
             <Route path="/grades" element={<Grades data={this.state.grades} />} />
             <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
-            <Route
-              path='/dashboard'
-              element={<PrivateRoute paths={['/dashboard', '/settings']} redirectTo="/login" />}
-            />
-            <Route
-              path='/settings'
-              element={<PrivateRoute paths={['/dashboard', '/settings']} redirectTo="/login" />}
-            />
+            <Route path='/dashboard' element={<PrivateRoute component={Dashboard} redirectTo="/login" />} />
+            <Route path='/settings' element={<PrivateRoute component={Settings} redirectTo="/login" />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>
