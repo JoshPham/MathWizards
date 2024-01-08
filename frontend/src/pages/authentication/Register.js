@@ -1,12 +1,22 @@
 // RegisterPage.js
 
 import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import { useHistory } from 'react-router-dom';
 import "./RegisterPage.css";
+import axios from 'axios'
+
+
 
 function RegisterPage() {
-  const [passLengthStyle, setPassLengthStyle] = useState('red')
+  const [requirementsShow, setrequirementsShow] = useState('none')
+  const [confirmHide, setConfirmHide] = useState(true)
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
+  const [usernameAvailable, setUsernameAvailable] = useState(true)
+  const [emailAvailable, setemailAvailable] = useState(true)
+  const [invalidFields, setInvalidFields] = useState()
+
+
   const [passMatchStyle, setpassMatchStyle] = useState('none')
   const [isEntirelyNumeric, setIsEntirelyNumeric] = useState('');
   const [numericColor, setNumericColor] = useState('black');
@@ -37,11 +47,7 @@ function RegisterPage() {
       console.error('Error fetching common passwords:', error);
       return [];
     }
-<<<<<<< HEAD
-  };
-=======
   };  
->>>>>>> 15545c03526b0c47697a2513ad4d32e7022aaa4e
 
   const checkCommonPassword = async () => {
     if (password === '') {
@@ -62,59 +68,111 @@ function RegisterPage() {
   };
 
   const checkEmail = () => {
-    if (email === '') {
-      setEmailErrorMessage('');
-      return;
-    }
+    const emailValue = email;
   
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-    if (!emailRegex.test(email)) {
-      setEmailErrorMessage('Invalid Email');
+    if (emailValue.length === 0) {
+      
     } else {
-      setEmailErrorMessage('');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+      if (!emailRegex.test(emailValue)) {
+        setEmailErrorMessage('Invalid Email');
+      } else {
+        setEmailErrorMessage('');
+      }
     }
   };
+  
+  const checkUsernameAvailability = async () => {
+    if (username === '') {
+      setEmailErrorMessage('')
+    } else{
+        try {
+          const response = await axios.get(`http://localhost:8000/api/check-username/${username}/`);
+          const { isAvailable } = response.data;
 
+          setUsernameAvailable(isAvailable);
+        } catch (error) {
+          console.error('Error checking username availability:', error);
+        }
+      }
+  };
+  
+  const checkEmailAvailability = async () => {
+    if (email === '') {
+      setemailAvailable(true)
+    } else{
+        try {
+          const response = await axios.get(`http://localhost:8000/api/check-email/${email}/`);
+          const { isAvailable } = response.data;
 
+          setemailAvailable(isAvailable);
+        } catch (error) {
+          console.error('Error checking username availability:', error);
+        }
+      }
+  };
 
-  // const checkPersonalInfo = () => {
-  //   if (password === '' || password2 === '') {
-  //     setPersonalInfoColor('black');
-  //   } else {
-  //     const stringsToCheck = [username, first_name, last_name];
-  //     const lowercasePassword = password.toLowerCase();
-  //     // const lowercasePassword2 = password2.toLowerCase();
+  const validateEntries = () => {
+    if ((username !== '' && first_name !== '' && last_name !== '' && email !== '' && password !== '' && password2 !== '') && 
+    (!usernameAvailable || emailErrorMessage || passMatchStyle === 'block' || lengthColor === 'red' || numericColor === 'red' || personalInfoColor === 'red' || commonPasswordColor === 'red')) {
+      setInvalidFields(true)
+    } else {
+      setInvalidFields(false)
+    }
+  }
+  
 
-  //     const filteredStrings = stringsToCheck.map(str => str.length >= 3 ? str : null).filter(Boolean); // strings that are at least three
+  const checkPersonalInfo = () => {
+    if (password === '') {
+      setPersonalInfoColor('black');
+    } else {
+      const stringsToCheck = [username, first_name, last_name];
+      const lowercasePassword = password.toLowerCase();
+      // const lowercasePassword2 = password2.toLowerCase();
 
-  //     let matches = false
+      const filteredStrings = stringsToCheck.map(str => str.length >= 3 ? str : null).filter(Boolean); // strings that are at least three
 
-  //     for (const str of filteredStrings) {
-  //       if (lowercasePassword.includes(str.toLowerCase().slice(0, 3))) {
-  //         matches = true
-  //       }
-  //     }
+      let matches = false
 
-  //     setPersonalInfoColor(matches? 'red' : 'green');
-  //   }
-  // };
+      for (const str of filteredStrings) {
+        if (lowercasePassword.includes(str.toLowerCase().slice(0, 3))) {
+          matches = true
+        }
+      }
+
+      setPersonalInfoColor(matches? 'red' : 'green');
+    }
+  };
 
 
   const checkPasswordLength = () => {
     if (password === '') {
       setLengthColor('black'); // Set color to black if it's blank
+      setrequirementsShow('none')
+      setConfirmHide(true)
     } else {
       setLengthColor(password.length < 8 ? 'red' : 'green');
+      setrequirementsShow('block')
+      if (password.length < 8) {
+        setConfirmHide(true)
+        
+      } else {
+        setConfirmHide(false)
+      }
     }
   };
 
   const checkPassMatch = () => {
     // console.log(password, password2)
-    if (password !== password2) {
-      setpassMatchStyle('block')
-    } else {
+    if (password2 === '') {
       setpassMatchStyle('none')
+    } else {
+      if (password !== password2) {
+        setpassMatchStyle('block')
+      } else {
+        setpassMatchStyle('none')
+        }
     }
   }
 
@@ -131,12 +189,18 @@ function RegisterPage() {
   };
 
   useEffect(() => {
+    const body = document.body;
+    body.style.overflow = 'hidden';
+
     checkPassMatch();
     checkPasswordLength();
     checkNumericPassword();
-    // checkPersonalInfo();
+    checkPersonalInfo();
     checkCommonPassword();
     checkEmail()
+    checkUsernameAvailability()
+    checkUsernameAvailability()
+    validateEntries()
   
     const passlength = document.getElementById('passlength');
     const match = document.getElementById('match');
@@ -151,6 +215,7 @@ function RegisterPage() {
     toocommon.style.color = commonPasswordColor;
 
     if (
+      !usernameAvailable ||
       emailErrorMessage ||
       passMatchStyle === 'block' ||
       lengthColor === 'red' ||
@@ -172,7 +237,7 @@ function RegisterPage() {
     if (authTokens) {
       history.push('/dashboard');
     }
-  }, [authTokens, history, lengthColor, password, password2, passMatchStyle, isEntirelyNumeric, numericColor, personalInfoColor, commonPasswordColor]);
+  }, [authTokens, history, lengthColor, password, password2, passMatchStyle, isEntirelyNumeric, numericColor, personalInfoColor, commonPasswordColor, usernameAvailable, emailAvailable]);
   
 
 
@@ -196,7 +261,7 @@ function RegisterPage() {
   return (
     <div>
       <section className="vh-100 gradient-custom">
-          <div className="container py-5 h-100" style={{ marginTop: '50px' }}>
+          <div className="container py-5 h-100" style={{ marginTop: '40px' }}>
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col col-xl-10">
                 <div className="card card-landing">
@@ -218,7 +283,8 @@ function RegisterPage() {
                         <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: 1 }}>Sign Up</h5>
                         <div className="form-outline mb-2">
                           <label className="form-label" htmlFor="formUsername">Username</label>
-                          <input type="text" id="formUsername" className="form-control form-control-lg" placeholder="Username" onChange={e => setUsername(e.target.value)} />
+                          {usernameAvailable ? null : <p style={{ color: 'red' }}><b>✘ Username Already Exists</b></p>}
+                          <input type="text" id="formUsername" className="form-control form-control-lg" placeholder="Username" onKeyUp={checkUsernameAvailability} onChange={(e) => {e.persist();setUsername(e.target.value);}} />
                         </div>
                         <div className="form-outline mb-2">
                           <label className="form-label" htmlFor="formFirstName">First Name</label>
@@ -230,8 +296,9 @@ function RegisterPage() {
                         </div>
                         <div className="form-outline mb-2">
                           <label className="form-label" htmlFor="formEmail">Email Address</label>
-                          {emailErrorMessage && (<p style={{ color: 'red', fontSize: '14px', marginBottom: '5px' }}>{emailErrorMessage}</p>)}
-                          <input type="email" id="formEmail" className="form-control form-control-lg" placeholder="Email Address" onChange={(e) => {e.persist(); setEmail(e.target.value); checkEmail()}}/>
+                          {emailErrorMessage && (<p style={{ color: 'red'}}><b>✘ {emailErrorMessage}</b></p>)}
+                          {emailAvailable ? null : <p style={{ color: 'red' }}><b>✘ This Email Address Is Already Registered With An Account</b></p>}
+                          <input type="email" id="formEmail" className="form-control form-control-lg" placeholder="Email Address" onKeyUp={(e) => { checkEmail(); checkEmailAvailability(e); }} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="form-outline mb-2">
                           <label className="form-label" htmlFor="formPassword">Password</label>
@@ -239,17 +306,20 @@ function RegisterPage() {
                         </div>
                         <div className="form-outline mb-4">
                           <label className="form-label" htmlFor="formConfirmPassword">Confirm Password</label>
-                          <input type="password" id="formConfirmPassword" className="form-control form-control-lg" placeholder="Confirm Password" onChange={(e) => {setPassword2(e.target.value)}} />
+                          <input type="password" id="formConfirmPassword" className="form-control form-control-lg" disabled={confirmHide} placeholder="Confirm Password" onChange={(e) => {setPassword2(e.target.value)}} />
                         </div>
-                        <div className='requirements'>
-                          <p id="match" style={{ color: 'red', display: passMatchStyle }}>Password don't match</p>
-                          <p id='passlength'>Password must be at least 8 characters</p>
-                          <p id='entirelynumeric'>Can't be entirely numeric</p>
-                          <p id='toocommon'>Can't be too common (at least 1 number and special character)</p>
-                          <p id='personalinfo'>Can't have any personal information</p>
+                        <div className='requirements' style={{display: requirementsShow}}>
+                          <p id="match" style={{ color: 'red', display: passMatchStyle }}><b>✘ Passwords don't match</b></p>
+                          <p id='passlength'>{lengthColor === 'green' ? '✔' : '✘'} Password must be at least 8 characters</p>
+                          <p id='entirelynumeric'>{numericColor === 'green' ? '✔' : '✘'} Can't be entirely numeric</p>
+                          <p id='toocommon'>{commonPasswordColor === 'green' ? '✔' : '✘'} Can't be too common (at least 1 number and special character)</p>
+                          <p id='personalinfo'>{personalInfoColor === 'green' ? '✔' : '✘'} Can't have any personal information</p>
                         </div>
                         <div className="pt-1 mb-4">
-                          <button className="btn btn-dark btn-lg btn-block button" disabled={isButtonDisabled} type="submit">Register</button>
+                        <label style={{color: 'red'}}>{invalidFields?<b>Review and validate all entries for accuracy and completeness</b>:''}</label>
+                        <button className="btn btn-dark btn-lg btn-block button" disabled={isButtonDisabled} title="check all fields" type="submit">Register</button>
+                        
+
                           <p className="pb-lg-2 small text-muted logintext" style={{textDecoration: 'none'}}>Already have an account? <a href="/login">Login here</a></p>
                         </div>
                       </form>

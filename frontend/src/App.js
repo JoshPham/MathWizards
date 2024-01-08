@@ -1,14 +1,29 @@
+// packages
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+import axios from 'axios';
+import "./App.css";
+
+// authentication files
+import PrivateRoute from './utils/PrivateRoute'
+import { AuthProvider } from "./context/AuthContext";
+import Dashboard from './pages/authentication/Dashboard';
+import Settings from './pages/authentication/Settings'
+import Login from './pages/authentication/Login';
+import Register from './pages/authentication/Register';
+
+// components
 import Navbar from './components/Navbar';
+
+// pages
 import Home from './pages/Home';
 import About from './pages/About';
-import Settings from './pages/Settings';
 import Grades from './pages/grades/Grades';
 import GradePage from './pages/grades/GradePage';
 import NoPage from './pages/NoPage';
-import axios from 'axios';
-import "./App.css";
+
+const history = createBrowserHistory()
 
 class App extends React.Component {
   state = { grades: [] };
@@ -41,19 +56,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Navbar />
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/Settings" element={<Settings />} />
-            <Route path="/Grades" element={<Grades data={this.state.grades} />} />
-            <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
-            <Route path="*" element={<NoPage />} />
-          </Routes>
-        </div>
-      </Router>
+      <AuthProvider>
+        <Router history={history}>
+          <div>
+            <Navbar />
+            <Switch>
+              <PrivateRoute path="/dashboard"><Dashboard /></PrivateRoute>
+              <PrivateRoute path="/settings"><Settings /></PrivateRoute>
+              <Route exact path={['/', '/home']} component={Home} />
+              <Route component={Login} path='/login' />
+              <Route component={Register} path='/register' />
+              <Route component={About} path='/about'/>
+              <Route component={<Grades data={this.state.grades} />} path='/Grades'/>
+              <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
+              <Route path="*" element={<NoPage />} />
+            </Switch>
+          </div>
+        </Router>
+      </AuthProvider>
     );
   }
 }

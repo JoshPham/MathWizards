@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './NavbarStyles.css';
 import logo from './logo192.png';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   let boxClass = ["main-menu"];
@@ -18,7 +19,7 @@ export default function Navbar() {
         </div>
         <div className="menu">
           <ul className={boxClass.join(' ')}>
-            <li><NavLink exact to="/">Home</NavLink></li>
+            <li><Link to="/">Home</Link></li>
             <li>
               <NavLink to="/grades/" id="grade">Grades ⮟</NavLink>
               <ul className="dropdown">
