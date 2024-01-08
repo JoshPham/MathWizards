@@ -1,3 +1,7 @@
+.container{
+  width: 50%;
+}
+
 .sub-container{
   margin-top: .5rem;
 }
@@ -55,8 +59,8 @@ h1{
 
 .background-image {
   position: fixed;
-  top: 0; /* Adjust as needed */
-  right: 0; /* Adjust as needed */
+  top: 0;
+  right: 0;
   height: 100%;
   width: 49%;
   z-index: -1;

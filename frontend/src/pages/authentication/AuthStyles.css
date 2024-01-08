@@ -1,0 +1,76 @@
+.container{
+    width: 50%;
+}
+
+.background-image {
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 49%;
+    z-index: -1;
+}
+
+.icon{
+    height: 3rem;
+}
+
+.welcome{
+  margin: 3rem 0;
+}
+
+.title{
+    color: white;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.form-container{
+    background: #1a2a50;
+    border-style: solid;
+    border-color: #000820;
+    border-radius: .5rem;
+    border-width: 0.75rem;
+    padding: 0.1rem 1rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.field-title{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #becef5;
+}
+
+.field{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.button-div{
+    margin: 2rem 0;
+}
+
+.button{
+    font-size: 2.5rem;
+    font-weight: bold;
+    background-color: #2d4783;
+    color: white;
+    border: none;
+    border-radius: .25rem;
+    padding: .25rem;
+}
+
+.account{
+    margin: 1.5rem 0;
+    font-size: 2rem;
+}
+
+.requirements{
+    margin-bottom: 4rem;
+}
+
+.requirements p{
+    margin-bottom: 1.5rem;
+}

@@ -15,14 +15,14 @@ function Dashboard() {
 
   return (
     <>
-    <div className="container">
-      <div className="main">
-        <h5 className='h5'>Welcome, {first_name}</h5>
-        <h1 className="h2">My Dashboard</h1>
-        <hr/>
+      <div className="container">
+        <div className="main">
+          <h5 className='h5'>Welcome, {first_name}</h5>
+          <h1 className="h2">My Dashboard</h1>
+          <hr/>
+        </div>
       </div>
-    </div>
-  </>
+    </>
   )
 }
 
