@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
 import './NavbarStyles.css';
 import logo from './logo192.png';
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext'
+const swal = require('sweetalert2')
 
 export default function Navbar() {
-  let boxClass = ["main-menu"];
+  const {user, logoutUser} = useContext(AuthContext)
+  const token = localStorage.getItem('authTokens')
 
+  if (token) { // a token exists, meaning logged in
+    const decoded = jwtDecode(token)
+    var user_id = decoded.user_id
+  }
   return (
     <>
       <nav>
@@ -18,8 +26,8 @@ export default function Navbar() {
           <div className="item-2"></div>
         </div>
         <div className="menu">
-          <ul className={boxClass.join(' ')}>
-            <li><Link to="/">Home</Link></li>
+          <ul className="main-menu">
+            <li><NavLink exact to="/">Home</NavLink></li>
             <li>
               <NavLink to="/grades/" id="grade">Grades ⮟</NavLink>
               <ul className="dropdown">
@@ -31,10 +39,30 @@ export default function Navbar() {
                 <li className='menu-item'><NavLink to="/grades/5/">Fifth Grade</NavLink></li>
               </ul>
             </li>
-            <li><NavLink to="/help/">Help Desk</NavLink></li>
-            <li><NavLink to="/login/">Login</NavLink></li>
-            <li><NavLink to="/register/">Register</NavLink></li>
-            <li><NavLink to="/settings/">Settings</NavLink></li>
+            {/* <li><NavLink to="/help/">Help Desk</NavLink></li> */}
+            {token === null && // not logged in
+                <Fragment>
+                  <li>
+                    <NavLink className="nav-link" to="/login" activeClassName="active" aria-current="page">Login</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link" to="/register" activeClassName="active" aria-current="page">Register</NavLink>
+                  </li>
+                </Fragment>
+              }
+              {token !== null && // logged in
+                <Fragment>
+                  <li>
+                    <NavLink to="/dashboard" activeClassName="active" aria-current="page">Dashboard</NavLink>
+                  </li>
+                  <li>
+                    <a onClick={logoutUser} style={{ cursor: 'pointer' }}>Logout</a>
+                  </li>
+                  <li>
+                    <NavLink to="/settings" activeClassName="active" style={{ cursor: 'pointer' }}>Settings</NavLink>
+                  </li>
+                </Fragment>
+              }
           </ul>
         </div>
       </nav>

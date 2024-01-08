@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Navigate, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCubes } from "@fortawesome/free-solid-svg-icons";
 import "./LoginPage.css";
 const swal = require('sweetalert2')
 
 
-function LoginPage() {
+function Login() {
   const { loginUser, isAuthenticated } = useContext(AuthContext);
-  const history = useHistory();
+  const history = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      history.push("/dashboard");
+      history("/dashboard");
     }
   }, [history, isAuthenticated]);
 
@@ -63,7 +63,7 @@ function LoginPage() {
   };
 
   const handleSuccessfulLogin = () => {
-    history.push("/dashboard");
+    history("/dashboard");
   };
 
   return (
@@ -78,6 +78,7 @@ function LoginPage() {
                     src="https://c8.alamy.com/comp/D9N2MX/protractor-on-the-background-of-mathematical-formulas-and-algorithms-D9N2MX.jpg"
                     alt="login form"
                     className="img-fluid"
+                    width={100}
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -141,4 +142,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

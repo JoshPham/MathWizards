@@ -1,31 +1,22 @@
-// packages
-import React from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory } from "history";
-import axios from 'axios';
-import "./App.css";
-
-// authentication files
-import PrivateRoute from './utils/PrivateRoute'
-import { AuthProvider } from "./context/AuthContext";
+// App.js
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
+import { AuthProvider } from './context/AuthContext';
 import Dashboard from './pages/authentication/Dashboard';
-import Settings from './pages/authentication/Settings'
+import Settings from './pages/authentication/Settings';
 import Login from './pages/authentication/Login';
 import Register from './pages/authentication/Register';
-
-// components
-import Navbar from './components/Navbar';
-
-// pages
 import Home from './pages/Home';
 import About from './pages/About';
 import Grades from './pages/grades/Grades';
 import GradePage from './pages/grades/GradePage';
 import NoPage from './pages/NoPage';
+import Navbar from './components/Navbar';
+import axios from 'axios';
+import './App.css';
 
-const history = createBrowserHistory()
-
-class App extends React.Component {
+class App extends Component {
   state = { grades: [] };
 
   async componentDidMount() {
@@ -57,22 +48,26 @@ class App extends React.Component {
   render() {
     return (
       <AuthProvider>
-        <Router history={history}>
-          <div>
-            <Navbar />
-            <Switch>
-              <PrivateRoute path="/dashboard"><Dashboard /></PrivateRoute>
-              <PrivateRoute path="/settings"><Settings /></PrivateRoute>
-              <Route exact path={['/', '/home']} component={Home} />
-              <Route component={Login} path='/login' />
-              <Route component={Register} path='/register' />
-              <Route component={About} path='/about'/>
-              <Route component={<Grades data={this.state.grades} />} path='/Grades'/>
-              <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
-              <Route path="*" element={<NoPage />} />
-            </Switch>
-          </div>
-        </Router>
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/grades" element={<Grades data={this.state.grades} />} />
+            <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
+            <Route
+              path='/dashboard'
+              element={<PrivateRoute paths={['/dashboard', '/settings']} redirectTo="/login" />}
+            />
+            <Route
+              path='/settings'
+              element={<PrivateRoute paths={['/dashboard', '/settings']} redirectTo="/login" />}
+            />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </div>
       </AuthProvider>
     );
   }

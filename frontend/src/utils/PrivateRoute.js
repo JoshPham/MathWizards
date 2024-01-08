@@ -1,15 +1,14 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { useContext } from 'react';
-import AuthContext from '../context/AuthContext';
+import { Navigate, Outlet, Route } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const { user } = useContext(AuthContext);
+const PrivateRoute = ({ paths, redirectTo, ...props }) => {
+  const { isAuthenticated } = useAuth();
 
-  return (
-    <Route
-      {...rest} render={({ location }) => user ? (children) : (<Redirect to={{pathname: '/login',state: { from: location },}}/>)}/>
-  );
+  // Check if the current path is allowed
+  const isAllowed = paths ? paths.some(path => window.location.pathname.startsWith(path)) : true;
+
+  return isAllowed && isAuthenticated() ? <Outlet {...props} /> : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoute;

@@ -1,19 +1,14 @@
-import {createContext, useState, useEffect} from "react";
-// import {createBrowserHistory} from 'history'
-// import { Redirect } from "react-router-dom";
-// import {useHistory} from "react-router-dom";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-const swal = require('sweetalert2')
+import { useNavigate } from 'react-router-dom';
+const swal = require('sweetalert2');
 
 const AuthContext = createContext();
-
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-
-  // const history = useHistory()
-  // const history = createBrowserHistory();
+  const navigate = useNavigate();
 
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
@@ -41,15 +36,12 @@ export const AuthProvider = ({ children }) => {
       }),
     });
 
-    const data = await response.json();
-
-    if (response.status === 200) {
-      console.log("Logged In");
+    if (response.ok) {
+      const data = await response.json();
       setAuthTokens(data);
       setUser(jwtDecode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
-      // history.push("/dashboard"); // Remove this line
-      onSuccess(); // Call the callback function for successful login
+      onSuccess();
       swal.fire({
         title: "Login Successful",
         icon: "success",
@@ -60,8 +52,7 @@ export const AuthProvider = ({ children }) => {
         showConfirmButton: false,
       });
     } else {
-      console.log(response.status);
-      console.log("there was a server issue");
+      console.log("Login failed:", response.status);
       swal.fire({
         title: "Error While Logging In",
         html: "Incorrect Username or Password",
@@ -76,11 +67,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const registerUser = async (username, first_name, last_name, email, password, password2, onSuccess) => {
-    // let passlength = document.getElementById('passlength')
-    // let entirelynumeric = document.getElementById('entirelynumeric')
-    // let toocommon = document.getElementById('toocommon')
-    // let personalinfo = document.getElementById('personalinfo')
-
     const response = await fetch("http://127.0.0.1:8000/api/register/", {
       method: "POST",
       headers: {
@@ -91,8 +77,8 @@ export const AuthProvider = ({ children }) => {
       }),
     });
 
-    if (response.status === 201) {
-      onSuccess(); // Call the callback function for successful registration
+    if (response.ok) {
+      onSuccess();
       swal.fire({
         title: "Registration Successful, Login Now",
         icon: "success",
@@ -103,10 +89,9 @@ export const AuthProvider = ({ children }) => {
         showConfirmButton: false,
       })
     } else {
-      console.log(response.status);
-      console.log("There was a server issue");
+      console.log("Registration failed:", response.status);
       swal.fire({
-        title: "An Error Occured While Registering",
+        title: "An Error Occurred While Registering",
         html: "Possible Causes:<br>- That username already exists<br>- Server Error",
         icon: "error",
         toast: true,
@@ -122,7 +107,7 @@ export const AuthProvider = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
-    
+
     swal.fire({
       title: "You have been logged out...",
       icon: "success",
@@ -132,13 +117,14 @@ export const AuthProvider = ({ children }) => {
       timerProgressBar: true,
       showConfirmButton: false,
     });
-    // history.push("/login"); // it shows in url but doesn't navigate
-    document.location.reload()
+
+    // Navigate to login using navigate function
+    navigate("/login");
   };
 
   const isAuthenticated = () => {
-    return !!authTokens
-  }
+    return !!authTokens;
+  };
 
   const contextData = {
     user,
@@ -164,3 +150,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

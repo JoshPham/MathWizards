@@ -2,13 +2,13 @@
 
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from "../../context/AuthContext";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./RegisterPage.css";
 import axios from 'axios'
 
 
 
-function RegisterPage() {
+function Register() {
   const [requirementsShow, setrequirementsShow] = useState('none')
   const [confirmHide, setConfirmHide] = useState(true)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
@@ -35,7 +35,7 @@ function RegisterPage() {
   const [password2, setPassword2] = useState('');
 
   const { registerUser, authTokens } = useContext(AuthContext);
-  const history = useHistory();
+  const history = useNavigate();
 
 
   const fetchCommonPasswords = async () => {
@@ -235,7 +235,7 @@ function RegisterPage() {
     }
   
     if (authTokens) {
-      history.push('/dashboard');
+      history('/dashboard');
     }
   }, [authTokens, history, lengthColor, password, password2, passMatchStyle, isEntirelyNumeric, numericColor, personalInfoColor, commonPasswordColor, usernameAvailable, emailAvailable]);
   
@@ -255,7 +255,7 @@ function RegisterPage() {
   };
 
   const handleSuccessfulRegistration = () => {
-    history.push("/login");
+    history("/login");
   };
 
   return (
@@ -271,6 +271,7 @@ function RegisterPage() {
                       src="https://c8.alamy.com/comp/D9N2MX/protractor-on-the-background-of-mathematical-formulas-and-algorithms-D9N2MX.jpg"
                       alt="login form"
                       className="img-fluid"
+                      width={100}
                     />
                   </div>
                     <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -335,4 +336,4 @@ function RegisterPage() {
   )
 }
 
-export default RegisterPage;
+export default Register;
