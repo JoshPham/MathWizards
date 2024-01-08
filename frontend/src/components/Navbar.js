@@ -48,6 +48,9 @@ export default function Navbar() {
                   <li>
                     <NavLink className="nav-link" to="/register" activeClassName="active" aria-current="page">Register</NavLink>
                   </li>
+                  <li>
+                    <NavLink className="nav-link" to="/help" activeClassName="active" aria-current="page">Help Desk</NavLink>
+                  </li>
                 </Fragment>
               }
               {token !== null && // logged in
@@ -55,11 +58,17 @@ export default function Navbar() {
                   <li>
                     <NavLink to="/dashboard" activeClassName="active" aria-current="page">Dashboard</NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <a onClick={logoutUser} style={{ cursor: 'pointer' }}>Logout</a>
+                  </li> */}
+                  <li>
+                    <NavLink onClick={logoutUser} activeClassName="active" style={{ cursor: 'pointer' }}>Logout</NavLink>
                   </li>
                   <li>
                     <NavLink to="/settings" activeClassName="active" style={{ cursor: 'pointer' }}>Settings</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/help" activeClassName="active" style={{ cursor: 'pointer' }}>Help Desk</NavLink>
                   </li>
                 </Fragment>
               }

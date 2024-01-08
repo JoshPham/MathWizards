@@ -1,4 +1,5 @@
 from django.db import models
+from authentication.models import User
 
 class Grade(models.Model):
     grade_id = models.IntegerField(default=1)
@@ -42,3 +43,25 @@ class Problem(models.Model):
 
     def __str__(self):
         return f"Question: {self.text_question} (Lesson: {self.lesson.title}, Unit: {self.lesson.unit.title}, Grade: {self.lesson.unit.grade.title})"
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    message = models.TextField()
+    notified = models.DateTimeField(auto_now_add=True)
+    isRead = models.BooleanField(False)
+
+    def __str__(self):
+        return f"{self.user}: {self.message}"
+    
+class AssignmentReport(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    unit = models.CharField(max_length=255)
+    lesson = models.CharField(max_length=255)
+    grade = models.IntegerField()
+    completedStatus = models.CharField(max_length=255)
+    score = models.DecimalField(max_digits=4, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.user}: {self.grade}: {self.lesson}"

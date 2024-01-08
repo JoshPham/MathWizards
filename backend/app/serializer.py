@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Grade, Unit, Lesson, Problem
+from rest_framework import serializers
+from .models import Grade, Unit, Lesson, Problem, Notification, AssignmentReport
 
 class GradeSerializer(ModelSerializer):
     class Meta:
@@ -20,3 +21,13 @@ class ProblemSerializer(ModelSerializer):
     class Meta:
         model = Problem
         fields = ['lesson', 'text_question', 'num_answer', 'answer_a', 'answer_b', 'answer_c', 'answer_d']
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['user', 'message', 'notified', 'isRead']
+
+class AssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssignmentReport
+        fields = '__all__'
