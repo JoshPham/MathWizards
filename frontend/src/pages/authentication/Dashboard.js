@@ -13,10 +13,8 @@ function Dashboard() {
     var first_name = decoded.first_name
   }
 
-
-
   return (
-  <div className="container-fluid" style={{ marginTop: 100 }}>
+  <div className="container">
           <h5 className='h5'>Welcome, {first_name}</h5>
           <h1 className="h2">My Dashboard</h1>
           <hr/>

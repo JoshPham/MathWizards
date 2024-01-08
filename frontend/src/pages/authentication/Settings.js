@@ -77,7 +77,7 @@ function Settings() {
   };
 
   return (
-    <div className="container-fluid" style={{ marginTop: 100 }}>
+    <div className="container">
       <h1 className="h2">Settings</h1>
       <hr />
       <h1 className="h4">Edit Profile</h1>
