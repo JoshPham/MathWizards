@@ -1,10 +1,17 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.container{
-    padding: 0.625rem;
+body {
+  color: #a9c6de;
+  background: #131623;
+}
+
+.container {
+  padding: 0.625rem;
+  width: 50%;
+  position: relative;
 }

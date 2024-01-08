@@ -2,7 +2,9 @@ function About() {
     return(
         <>
             <div className="container">
-                <h1>About Page</h1>
+                <div className="main">
+                    <h1>About Page</h1>
+                </div>
             </div>
         </>
     )

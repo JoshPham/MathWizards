@@ -2,7 +2,12 @@
   margin-top: .5rem;
 }
 
+.main{
+  margin-top: 5.5rem;
+}
+
 h1{
+  color:#ffffff;
   font-size: 3rem;
 }
 
@@ -12,11 +17,12 @@ h1{
 
 .grade-title{
   font-size: 2.5rem;
-  color:#2d2c56;
+  color:#cadcff;
   text-decoration: underline;
 }
 
 .unit-list-title{
+  color:#ffffff;
   font-size: 2rem;
 }
 
@@ -25,6 +31,7 @@ h1{
 }
 
 .unit-title{
+  color:#ffffff;
   font-size: 1.5rem;
 }
 
@@ -44,6 +51,15 @@ h1{
   border-width: 0.75rem;
   padding: 0.1rem 1rem;
   margin-bottom: 1rem;
+}
+
+.background-image {
+  position: fixed;
+  top: 0; /* Adjust as needed */
+  right: 0; /* Adjust as needed */
+  height: 100%;
+  width: 49%;
+  z-index: -1;
 }
 
 .unit{
