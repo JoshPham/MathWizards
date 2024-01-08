@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import "./GradePage.css"
 
 const GradePage = ({ grades }) => {
   const { gradeNumber } = useParams();

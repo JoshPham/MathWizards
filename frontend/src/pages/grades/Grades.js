@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Grades extends React.Component {
   state = {
-    loading: true,
+    loading: false,
   };
 
   componentDidMount() {
@@ -22,37 +22,39 @@ class Grades extends React.Component {
       <>
         <div className="container">
           <h1>All Grades</h1>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            data ? (
-              data.length > 0 ? (
-                data.map((grade) => (
-                  <div key={grade.grade_id}>
-                    <div className="grade">
-                      <h2 className="grade-title"><Link to={`/grades/${grade.grade_id}`}>{grade.title}</Link></h2>
-                      <p>Description: {grade.description}</p>
-                    </div>
-
-                    <h3 className="unit-list">Units:</h3>
-                    <ul>
-                      {grade.units.map((unit) => (
-                        <li key={unit.unit_id}>
-                          <p className="unit-title">{unit.title}</p>
-                          <p className="unit-description">{unit.description}</p>
-                        </li>
-                      ))}
-                      <hr className="line" />
-                    </ul>
-                  </div>
-                ))
-              ) : (
-                <p>No grades available.</p>
-              )
+          <div className='sub-container'>
+            {loading ? (
+              <p>Loading...</p>
             ) : (
-              <p>Error loading data.</p>
-            )
-          )}
+              data ? (
+                data.length > 0 ? (
+                  data.map((grade) => (
+                    <div key={grade.grade_id} className='grade-container'>
+                      <div className="grade">
+                        <h2><Link to={`/grades/${grade.grade_id}`} className="grade-title">{grade.title}</Link></h2>
+                        <p>Description: {grade.description}</p>
+                      </div>
+
+                      <h3 className="unit-list-title">Units:</h3>
+                      <ul className='unit-list'>
+                        {grade.units.map((unit) => (
+                          <li key={unit.unit_id} className='unit'>
+                            <p className="unit-title">{unit.title}</p>
+                            <p className="unit-description">{unit.description}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))
+                ) : (
+                  <p>No grades available.</p>
+                )
+              ) : (
+                <p>Error loading data.</p>
+              )
+            )}
+          </div>
+          
         </div>
       </>
     );

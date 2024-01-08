@@ -189,8 +189,6 @@ function Register() {
   };
 
   useEffect(() => {
-    const body = document.body;
-    body.style.overflow = 'hidden';
 
     checkPassMatch();
     checkPasswordLength();
