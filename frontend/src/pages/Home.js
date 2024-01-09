@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Home() {
     const token = localStorage.getItem('authTokens')
@@ -15,12 +16,12 @@ function Home() {
           </p> 
           {token === null && // not logged in
             <p className="lead">
-              <a className="btn btn-success btn-lg" href="/login" role="button">
+              <NavLink className="button" to="/login" role="button">
                 Login
-              </a>
-              <a className="btn btn-success btn-lg ml-3" href="/register" role="button">
+              </NavLink>
+              <NavLink className="button" to="/register" role="button">
                 Register
-              </a>
+              </NavLink>
             </p>
           }
         </div>

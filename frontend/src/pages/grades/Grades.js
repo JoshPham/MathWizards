@@ -31,7 +31,7 @@ class Grades extends React.Component {
                 data ? (
                   data.length > 0 ? (
                     data.map((grade) => (
-                      <div key={grade.grade_id} className='grade-container'>
+                      <div key={grade.grade_id} className={`grade-container grade-${grade.grade_id}`}>
                         <div className="grade">
                           <h2><Link to={`/grades/${grade.grade_id}`} className="grade-title">{grade.title}</Link></h2>
                           <p>Description: {grade.description}</p>
