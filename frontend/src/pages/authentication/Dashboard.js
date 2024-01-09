@@ -33,56 +33,59 @@ function Dashboard() {
     }
   };
 
-  const goTo10Frame = () => {
-    navigate('/10-frame')
-  }
-  const goToNumberLine = () => {
-    navigate('/number-line')
-  }
   const goToCoordinatePlane = () => {
     navigate('/coordinate-plane')
   }
   const goToPosCoordinatePlane = () => {
     navigate('/pos-coordinate-plane')
   }
+  const goToNumberLine = () => {
+    navigate('/number-line')
+  }
+  const goToTenFrame = () => {
+    navigate('/ten-frame')
+  }
 
 
 
 
   return (
-  <div className="container-fluid">
-    <h5 className='h5'>Welcome, {first_name}</h5>
-    <h5 className="h5">Your ID is {user_id}</h5>
-    <h1 className="h2">My Dashboard</h1>
-    <button onClick={goTo10Frame}>10 Frame</button>
-    <button onClick={goToPosCoordinatePlane}>Positive Only Coordinate Plane</button>
-    <button onClick={goToCoordinatePlane}>Full Coordinate Plane</button>
-    <button onClick={goToNumberLine}>Number Line</button>
-    <hr/>
+  <div className="container">
+    <div className="main">
+      <h5 className='h5'>Welcome, {first_name}</h5>
+      <h5 className="h5">Your ID is {user_id}</h5>
+      <h1 className="h2">My Dashboard</h1>
+      <button onClick={goToCoordinatePlane}>Coordinate Plane</button>
+      <button onClick={goToPosCoordinatePlane}>Positive Only Coordinate Plane</button>
+      <button onClick={goToNumberLine}>Number Line</button>
+      <button onClick={goToTenFrame}>10 Frame</button>
+      <hr/>
 
-    <button onClick={handleCreateNotification}>Create Notification</button><br /><br />
-    <div className="notification-list-container">
-      <h2>Notifications</h2>
-      <hr />
-      <ul className="notification-list">
-          {notifications.map(notification => (
-              <li key={notification.id} className="notification-item">
-                  <span className="notification-message">{notification.message}</span>
-                  <span className="notification-date">
-                      Date: <b>{new Date(notification.notified).toLocaleString('en-US', {
-                          year: 'numeric',
-                          month: 'numeric',
-                          day: 'numeric',
-                          hour: 'numeric',
-                          minute: 'numeric',
-                      })}</b>
-                  </span>
-              </li>
-          ))}
-      </ul>
+      <button onClick={handleCreateNotification}>Create Notification</button><br /><br />
+      <div className="notification-list-container">
+        <h2>Notifications</h2>
+        <hr />
+        <ul className="notification-list">
+            {notifications.map(notification => (
+                <li key={notification.id} className="notification-item">
+                    <span className="notification-message">{notification.message}</span>
+                    <span className="notification-date">
+                        Date: <b>{new Date(notification.notified).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                        })}</b>
+                    </span>
+                </li>
+            ))}
+        </ul>
+      </div>
+      <br /><br />
+      <a href="/progress" className="button">Explore My Progress</a>
     </div>
-    <br /><br />
-    <a href="/progress" className="button">Explore My Progress</a>
+    
 
 
   </div>

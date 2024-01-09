@@ -35,7 +35,6 @@ const CoordinatePlaneComponent = () => {
       alert(`Incorrect. Clicked: (${clickedX}, ${clickedY}). Try again.`);
     }
   };
-  
 
   const updateClickablePoint = (event) => {
     const relativeX = event.clientX - coordinatePlaneRef.current.getBoundingClientRect().left;
@@ -44,8 +43,8 @@ const CoordinatePlaneComponent = () => {
     const gridX = Math.round(((relativeX / coordinatePlaneRef.current.clientWidth) * 100) / 10) * 10 - 50;
     const gridY = (Math.round(((relativeY / coordinatePlaneRef.current.clientHeight) * 100) / 10) * 10 - 50);
 
-    clickablePointRef.current.style.left = `${gridX + 49}%`;
-    clickablePointRef.current.style.top = `${gridY + 49}%`;
+    clickablePointRef.current.style.left = `${gridX + 50}%`;
+    clickablePointRef.current.style.top = `${gridY + 50}%`;
   };
 
   return (

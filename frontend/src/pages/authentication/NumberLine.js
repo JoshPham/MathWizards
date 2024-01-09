@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './NumberLine.css'; // Import your CSS file
+import './NumberLine.css';
 
 const NumberLine = () => {
   const [number, setNumber] = useState(Math.floor(Math.random() * 9) * 2);
@@ -28,7 +28,7 @@ const NumberLine = () => {
             <div className="number" onMouseOver={() => handleHover(i)}>
               {i}
             </div>
-            <div className="circle" onClick={() => validateChoice(i)}></div>
+            <div className="tencircle" onClick={() => validateChoice(i)}></div>
           </div>
         </div>
       );
@@ -40,15 +40,15 @@ const NumberLine = () => {
   };
 
   const handleHover = (i) => {
-    const circle = document.getElementById(i);
-    if (circle) {
-      circle.innerText = '';
-      circle.classList.add('visible');
+    const tencircle = document.getElementById(i);
+    if (tencircle) {
+      tencircle.innerText = '';
+      tencircle.classList.add('visible');
     }
   };
 
   return (
-    <div className='whole'>
+    <div className='body'>
       <h1 id="numberToClick">Please locate and click on the number:</h1>
       <h1 id="number">{number}</h1>
       <h3 id="notification"></h3>

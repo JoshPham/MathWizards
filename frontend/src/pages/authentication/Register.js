@@ -1,12 +1,12 @@
-// RegisterPage.js
-
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import "./RegisterPage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCubes } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
-
-
+import "./AuthStyles.css";
+import blue_background from './blue.png';
+import { NavLink } from 'react-router-dom';
 
 function Register() {
   const [requirementsShow, setrequirementsShow] = useState('none')
@@ -257,80 +257,77 @@ function Register() {
   };
 
   return (
-    <div>
-      <section className="vh-100 gradient-custom">
-          <div className="container py-5 h-100" style={{ marginTop: '40px' }}>
-            <div className="row d-flex justify-content-center align-items-center h-100">
-              <div className="col col-xl-10">
-                <div className="card card-landing">
-                  <div className="row g-0">
-                    <div className="col-md-6 col-lg-5 d-none d-md-block">
-                    <img
-                      src="https://c8.alamy.com/comp/D9N2MX/protractor-on-the-background-of-mathematical-formulas-and-algorithms-D9N2MX.jpg"
-                      alt="login form"
-                      className="img-fluid"
-                      width={100}
-                    />
-                  </div>
-                    <div className="col-md-6 col-lg-7 d-flex align-items-center">
-                      <div className="card-body p-4 p-lg-5 text-black form-container">
-                      <form onSubmit={handleSubmit}>
-                        <div className="d-flex align-items-center mb-3 pb-1">
-                          <i className="fas fa-cubes fa-2x me-3 icon" />
-                          <span className="h2 fw-bold mt-4">Welcome to <b>Math Wizard</b></span>
-                        </div>
-                        <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: 1 }}>Sign Up</h5>
-                        <div className="form-outline mb-2">
-                          <label className="form-label" htmlFor="formUsername">Username</label>
-                          {usernameAvailable ? null : <p style={{ color: 'red' }}><b>✘ Username Already Exists</b></p>}
-                          <input type="text" id="formUsername" className="form-control form-control-lg" placeholder="Username" onKeyUp={checkUsernameAvailability} onChange={(e) => {e.persist();setUsername(e.target.value);}} />
-                        </div>
-                        <div className="form-outline mb-2">
-                          <label className="form-label" htmlFor="formFirstName">First Name</label>
-                          <input type="text" id="formFirstName" className="form-control form-control-lg" placeholder="First Name" onChange={e => setFirst_Name(e.target.value)} />
-                        </div>
-                        <div className="form-outline mb-2">
-                          <label className="form-label" htmlFor="formLastName">Last Name</label>
-                          <input type="text" id="formLastName" className="form-control form-control-lg" placeholder="Last Name" onChange={e => setLast_Name(e.target.value)} />
-                        </div>
-                        <div className="form-outline mb-2">
-                          <label className="form-label" htmlFor="formEmail">Email Address</label>
-                          {emailErrorMessage && (<p style={{ color: 'red'}}><b>✘ {emailErrorMessage}</b></p>)}
-                          {emailAvailable ? null : <p style={{ color: 'red' }}><b>✘ This Email Address Is Already Registered With An Account</b></p>}
-                          <input type="email" id="formEmail" className="form-control form-control-lg" placeholder="Email Address" onKeyUp={(e) => { checkEmail(); checkEmailAvailability(e); }} onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div className="form-outline mb-2">
-                          <label className="form-label" htmlFor="formPassword">Password</label>
-                          <input type="password" id="formPassword" className="form-control form-control-lg" placeholder="Password" onChange={(e) => {e.persist();setPassword(e.target.value);}} />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <label className="form-label" htmlFor="formConfirmPassword">Confirm Password</label>
-                          <input type="password" id="formConfirmPassword" className="form-control form-control-lg" disabled={confirmHide} placeholder="Confirm Password" onChange={(e) => {setPassword2(e.target.value)}} />
-                        </div>
-                        <div className='requirements' style={{display: requirementsShow}}>
-                          <p id="match" style={{ color: 'red', display: passMatchStyle }}><b>✘ Passwords don't match</b></p>
-                          <p id='passlength'>{lengthColor === 'green' ? '✔' : '✘'} Password must be at least 8 characters</p>
-                          <p id='entirelynumeric'>{numericColor === 'green' ? '✔' : '✘'} Can't be entirely numeric</p>
-                          <p id='toocommon'>{commonPasswordColor === 'green' ? '✔' : '✘'} Can't be too common (at least 1 number and special character)</p>
-                          <p id='personalinfo'>{personalInfoColor === 'green' ? '✔' : '✘'} Can't have any personal information</p>
-                        </div>
-                        <div className="pt-1 mb-4">
-                        <label style={{color: 'red'}}>{invalidFields?<b>Review and validate all entries for accuracy and completeness</b>:''}</label>
-                        <button className="btn btn-dark btn-lg btn-block button" disabled={isButtonDisabled} title="check all fields" type="submit">Register</button>
-                        
+    <>
+      <img src={blue_background} alt="login form" className="auth-background-image"/>
+      <div className='auth-container'>
+        <div className="main">
+          <form onSubmit={handleSubmit}>
+            <div className="welcome">
+              <FontAwesomeIcon icon={faCubes} className="icon" />
+              <span className="title">Welcome to <b>Math Wizard</b></span>
+            </div>
+            <div className="sub-container">
+              <div className="form-container">
+                <h1 className="">Sign Up</h1>
+                <div className="">
+                  <label className="field-title" htmlFor="formUsername">Username</label>
+                  <br />
+                  {usernameAvailable ? null : <p style={{ color: 'red' }}><b>✘ Username Already Exists</b></p>}
+                  <input type="text" id="formUsername" className="field" placeholder="Username" onKeyUp={checkUsernameAvailability} onChange={(e) => {e.persist();setUsername(e.target.value);}} />
+                </div>
+                <div className="">
+                  <label className="field-title" htmlFor="formFirstName">First Name</label>
+                  <br />
+                  <input type="text" id="formFirstName" className="field" placeholder="First Name" onChange={e => setFirst_Name(e.target.value)} />
+                </div>
+                <div className="">
+                  <label className="field-title" htmlFor="formLastName">Last Name</label>
+                  <br />
+                  <input type="text" id="formLastName" className="field" placeholder="Last Name" onChange={e => setLast_Name(e.target.value)} />
+                </div>
+                <div className="">
+                  <label className="field-title" htmlFor="formEmail">Email Address</label>
+                  <br />
+                  {emailErrorMessage && (<p style={{ color: 'red'}}><b>✘ {emailErrorMessage}</b></p>)}
+                  {emailAvailable ? null : <p style={{ color: 'red' }}><b>✘ This Email Address Is Already Registered With An Account</b></p>}
+                  <input type="email" id="formEmail" className="field" placeholder="Email Address" onKeyUp={(e) => { checkEmail(); checkEmailAvailability(e); }} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="">
+                  <label className="field-title" htmlFor="formPassword">Password</label>
+                  <br />
+                  <input type="password" id="formPassword" className="field" placeholder="Password" onChange={(e) => {e.persist();setPassword(e.target.value);}} />
+                </div>
+                <div className="">
+                  <label className="field-title" htmlFor="formConfirmPassword">Confirm Password</label>
+                  <br />
+                  <input type="password" id="formConfirmPassword" className="field" disabled={confirmHide} placeholder="Confirm Password" onChange={(e) => {setPassword2(e.target.value)}} />
+                </div>
+                <div className='requirements' style={{display: requirementsShow}}>
+                  <p id="match" style={{ color: 'red', display: passMatchStyle }}><b>✘ Passwords don't match</b></p>
+                  <p id='passlength'>{lengthColor === 'green' ? '✔' : '✘'} Password must be at least 8 characters</p>
+                  <p id='entirelynumeric'>{numericColor === 'green' ? '✔' : '✘'} Can't be entirely numeric</p>
+                  <p id='toocommon'>{commonPasswordColor === 'green' ? '✔' : '✘'} Can't be too common (at least 1 number and special character)</p>
+                  <p id='personalinfo'>{personalInfoColor === 'green' ? '✔' : '✘'} Can't have any personal information</p>
+                </div>
+                
+                <div className="pt-1 mb-4">
+                <label style={{color: 'red'}}>{invalidFields?<b>Review and validate all entries for accuracy and completeness</b>:''}</label>
+                
+                
+                <div className="button-div">
+                  <button className="button" disabled={isButtonDisabled} title="check all fields" type="submit">Register</button>
+                </div>
 
-                          <p className="pb-lg-2 small text-muted logintext" style={{textDecoration: 'none'}}>Already have an account? <a href="/login">Login here</a></p>
-                        </div>
-                      </form>
-                    </div>
+                  <div className="account">
+                    <p>Already have an account? <NavLink to="/login">Login here</NavLink></p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   )
 }
 

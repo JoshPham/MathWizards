@@ -36,7 +36,7 @@ const PosCoordinatePlane = () => {
     const offsetY = event.clientY - rect.top;
 
     const snappedX = Math.round(offsetX / (rect.width / 5)) * 10;
-    const snappedY = -Math.round(offsetY / (rect.height / 5)) * 10 + 50;
+    const snappedY = -Math.round(offsetY / (rect.height / 5)) * 10  + 50;
 
     if (xCor === snappedX && yCor === snappedY) {
       alert('Correct!');

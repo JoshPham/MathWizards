@@ -27,7 +27,7 @@ body {
 .horizontal-axis,
 .vertical-axis {
     position: absolute;
-    background-color: #000;
+    background-color: #ffffff;
 }
 
 .horizontal-axis {
@@ -82,5 +82,5 @@ body {
 
 .tick-label {
     position: absolute;
-    color: #000;
+    color: #ffffff;
 }

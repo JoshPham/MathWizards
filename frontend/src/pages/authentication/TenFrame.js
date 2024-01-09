@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TenFrame.css';
+import './TenFrame.css'; // You can import your CSS styles here
 
 const TenFrame = () => {
   const [clickedNum, setClickedNum] = useState(null);
@@ -23,7 +23,7 @@ const TenFrame = () => {
   };
 
   return (
-    <div className='whole'>
+    <div className='body'>
       <div id="ten-frame" className="ten-frame">
         {createSquares()}
       </div>
