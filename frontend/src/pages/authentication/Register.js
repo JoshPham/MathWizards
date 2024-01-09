@@ -7,6 +7,7 @@ import "./RegisterPage.css";
 import axios from 'axios'
 import "./AuthStyles.css";
 import blue_background from './blue.png';
+import { NavLink } from 'react-router-dom';
 
 function Register() {
   const [requirementsShow, setrequirementsShow] = useState('none')
@@ -319,7 +320,7 @@ function Register() {
                 </div>
 
                   <div className="account">
-                    <p>Already have an account? <a href="/login">Login here</a></p>
+                    <p>Already have an account? <NavLink to="/login">Login here</NavLink></p>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from 'react-router-dom';
 import "./AuthStyles.css";
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
@@ -119,9 +120,9 @@ function Login() {
               <div className="account">
                 <p>
                   Don't have an account?{" "}
-                  <a href="/register">
+                  <NavLink to="/register">
                     Register here
-                  </a>
+                  </NavLink>
                 </p>
               </div>
               
