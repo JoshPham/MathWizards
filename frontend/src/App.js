@@ -7,6 +7,7 @@ import Dashboard from './pages/authentication/Dashboard';
 import Settings from './pages/authentication/Settings';
 import Login from './pages/authentication/Login';
 import Register from './pages/authentication/Register';
+import UserProgress from './pages/authentication/UserProgress';
 import Home from './pages/Home';
 import About from './pages/About';
 import Grades from './pages/grades/Grades';
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
             <Route path='/dashboard' element={<PrivateRoute component={Dashboard} redirectTo="/login" />} />
             <Route path='/settings' element={<PrivateRoute component={Settings} redirectTo="/login" />} />
+            <Route path='/progress' element={<PrivateRoute component={UserProgress} redirectTo="/login" />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </div>

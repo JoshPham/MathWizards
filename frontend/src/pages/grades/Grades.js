@@ -21,7 +21,7 @@ class Grades extends React.Component {
 
     return (
       <>
-        <div className='container'>
+        <div className='container grade-main'>
           <div className="main">
             <h1>All Grades</h1>
             <div className='sub-container'>

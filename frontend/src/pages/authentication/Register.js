@@ -3,7 +3,6 @@ import AuthContext from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCubes } from "@fortawesome/free-solid-svg-icons";
-import "./RegisterPage.css";
 import axios from 'axios'
 import "./AuthStyles.css";
 import blue_background from './blue.png';

@@ -16,4 +16,10 @@ urlpatterns = [
     path('units/<int:grade_id>/', get_units, name='get_units_by_grade'),
     path('lessons/<int:grade_id>/<int:unit_id>/', get_lessons, name='get_lessons_by_unit'),
     path('problems/<int:grade_id>/<int:unit_id>/<int:lesson_id>/', get_problems, name='get_problems_by_lesson'),
+
+    # Assignments and Notifications
+    path('assignments/<int:user_id>/', views.AssignmentList.as_view()),
+    path('create-notification/', views.CreateNotificationView.as_view()),
+    path('create-assignment-report/', views.CreateAssignmentView.as_view()),
+    path('notifications/<int:user_id>/', views.NotificationsView.as_view()),
 ]
