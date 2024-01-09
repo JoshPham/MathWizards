@@ -47,6 +47,30 @@ def get_problems(request, grade_id, unit_id, lesson_id):
     serializer = ProblemSerializer(problems, many=True)
     return JsonResponse(serializer.data, safe=False)
 
+class GradeView(APIView):
+    def get(self, request, *args, **kwargs):
+        grades = Grade.objects.all()
+        serializer = GradeSerializer(grades, many=True)
+        return Response(serializer.data)
+
+class UnitView(APIView):
+    def get(self, request, *args, **kwargs):
+        units = Unit.objects.all()
+        serializer = UnitSerializer(units, many=True)
+        return Response(serializer.data)
+
+class LessonView(APIView):
+    def get(self, request, *args, **kwargs):
+        lessons = Lesson.objects.all()
+        serializer = LessonSerializer(lessons, many=True)
+        return Response(serializer.data)
+
+class ProblemView(APIView):
+    def get(self, request, *args, **kwargs):
+        problems = Problem.objects.all()
+        serializer = ProblemSerializer(problems, many=True)
+        return Response(serializer.data)
+
 class NotificationsView(APIView):
     def get(self, request, user_id):
         notifications = Notification.objects.filter(user_id=user_id)

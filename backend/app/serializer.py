@@ -2,25 +2,33 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Grade, Unit, Lesson, Problem, Notification, AssignmentReport
 
-class GradeSerializer(ModelSerializer):
-    class Meta:
-        model = Grade
-        fields = ['grade_id', 'title', 'description', 'units']
-        
-class UnitSerializer(ModelSerializer):
-    class Meta:
-        model = Unit
-        fields = ['grade', 'unit_id', 'title', 'description', 'lessons']
+from rest_framework import serializers
 
-class LessonSerializer(ModelSerializer):
-    class Meta:
-        model = Lesson
-        fields = ['unit', 'lesson_id', 'title', 'description', 'content', 'problems']
-
-class ProblemSerializer(ModelSerializer):
+class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem
-        fields = ['lesson', 'text_question', 'num_answer', 'answer_a', 'answer_b', 'answer_c', 'answer_d']
+        fields = '__all__'
+
+class LessonSerializer(serializers.ModelSerializer):
+    problems = ProblemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Lesson
+        fields = '__all__'
+
+class UnitSerializer(serializers.ModelSerializer):
+    lessons = LessonSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Unit
+        fields = '__all__'
+
+class GradeSerializer(serializers.ModelSerializer):
+    units = UnitSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Grade
+        fields = '__all__'
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:

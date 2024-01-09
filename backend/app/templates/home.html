@@ -10,10 +10,18 @@
 </head>
 <body>
     <div>
+        <h1>Normal Data</h1>
         <a href="{% url 'all_grades' %}">Grade</a>
         <a href="{% url 'all_units' %}">Unit</a>
         <a href="{% url 'all_lessons' %}">Lesson</a>
         <a href="{% url 'all_problems' %}">Problem</a>
+    </div>
+    <div>
+        <h1>Serialized Data</h1>
+        <a href="{% url 'grade-list' %}">Grade</a>
+        <a href="{% url 'unit-list' %}">Unit</a>
+        <a href="{% url 'lesson-list' %}">Lesson</a>
+        <a href="{% url 'problem-list' %}">Problem</a>
     </div>
 </body>
 </html>
