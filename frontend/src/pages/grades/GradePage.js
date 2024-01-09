@@ -24,8 +24,8 @@ const GradePage = ({ grades }) => {
                   gradeData.units.map(unit => (
                     <li key={unit.unit_id}>
                       <p className='unit-label'>{unit.title}</p>
-                      <p className='unit-description'>{unit.description}</p>
-                      <hr className='line' />
+                      <p>{unit.description}</p>
+                      <hr className='line'/>
                     </li>
                   ))
                 ) : (
@@ -48,7 +48,7 @@ const GradePage = ({ grades }) => {
                           unit.lessons.map(lesson => (
                             <li key={lesson.lesson_id}>
                               <strong>{lesson.title}</strong>
-                              <p>Description: {lesson.description}</p>
+                              <p>{lesson.description}</p>
                               <p>Content: {lesson.content}</p>
 
                               <h4>Problems:</h4>

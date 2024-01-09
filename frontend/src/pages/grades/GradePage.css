@@ -20,6 +20,7 @@
     height: 40rem;
     width: 70%;
     padding: 0 20px;
+    overflow: auto;
 }
 
 .unit-label{
