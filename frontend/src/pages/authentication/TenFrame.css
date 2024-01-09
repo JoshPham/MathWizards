@@ -1,0 +1,47 @@
+.whole {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  #ten-frame {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    transform: rotate(180deg);
+  }
+  
+  .square {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: 2px black solid;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .circle {
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin: 2px;
+  }
+  
+  .square:hover .circle {
+    opacity: 1;
+  }
+  
+  .square:hover ~ .square .circle {
+    opacity: 1;
+  }
+  
+  .circle-visible {
+    opacity: 1 !important;
+  }

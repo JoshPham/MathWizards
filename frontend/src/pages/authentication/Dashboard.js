@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './Dashboard.css'
 import { jwtDecode } from 'jwt-decode';
 import { fetchNotifications, createNotification } from '../../utils/notificationUtils';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
+  const navigate = useNavigate()
   const [notifications, setNotifications] = useState([]);
 
   const token = localStorage.getItem('authTokens');
@@ -31,6 +33,19 @@ function Dashboard() {
     }
   };
 
+  const goTo10Frame = () => {
+    navigate('/10-frame')
+  }
+  const goToNumberLine = () => {
+    navigate('/number-line')
+  }
+  const goToCoordinatePlane = () => {
+    navigate('/coordinate-plane')
+  }
+  const goToPosCoordinatePlane = () => {
+    navigate('/pos-coordinate-plane')
+  }
+
 
 
 
@@ -39,6 +54,10 @@ function Dashboard() {
     <h5 className='h5'>Welcome, {first_name}</h5>
     <h5 className="h5">Your ID is {user_id}</h5>
     <h1 className="h2">My Dashboard</h1>
+    <button onClick={goTo10Frame}>10 Frame</button>
+    <button onClick={goToPosCoordinatePlane}>Positive Only Coordinate Plane</button>
+    <button onClick={goToCoordinatePlane}>Full Coordinate Plane</button>
+    <button onClick={goToNumberLine}>Number Line</button>
     <hr/>
 
     <button onClick={handleCreateNotification}>Create Notification</button><br /><br />

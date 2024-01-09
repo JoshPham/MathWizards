@@ -8,6 +8,10 @@ import Settings from './pages/authentication/Settings';
 import Login from './pages/authentication/Login';
 import Register from './pages/authentication/Register';
 import UserProgress from './pages/authentication/UserProgress';
+import TenFrame from './pages/authentication/TenFrame'
+import PosCoordinatePlane from './pages/authentication/PosCoordinatePlane'
+import CoordinatePlane from './pages/authentication/CoordinatePlane'
+import NumberLine from './pages/authentication/NumberLine'
 import Home from './pages/Home';
 import About from './pages/About';
 import Grades from './pages/grades/Grades';
@@ -61,7 +65,12 @@ class App extends Component {
             <Route path='/dashboard' element={<PrivateRoute component={Dashboard} redirectTo="/login" />} />
             <Route path='/settings' element={<PrivateRoute component={Settings} redirectTo="/login" />} />
             <Route path='/progress' element={<PrivateRoute component={UserProgress} redirectTo="/login" />} />
+            <Route path='/number-line' element={<PrivateRoute component={NumberLine} redirectTo="/login" />} />
+            <Route path='/10-frame' element={<PrivateRoute component={TenFrame} redirectTo="/login" />} />
+            <Route path='/coordinate-plane' element={<PrivateRoute component={CoordinatePlane} redirectTo="/login" />} />
+            <Route path='/pos-coordinate-plane' element={<PrivateRoute component={PosCoordinatePlane} redirectTo="/login" />} />
             <Route path="*" element={<NoPage />} />
+            {/* NumberLine, CoordinatePlane, PosCoordinatePlane */}
           </Routes>
         </div>
       </AuthProvider>
