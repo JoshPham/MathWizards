@@ -49,8 +49,8 @@ class App extends Component {
   render() {
     return (
       <AuthProvider>
+        <Navbar />
         <div>
-          <Navbar />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

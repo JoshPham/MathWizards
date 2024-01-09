@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import './assigmentTable.css'
+import './assignmentTable.css'
 import { jwtDecode } from 'jwt-decode';
 import { createAssignment, fetchAssignments } from '../../utils/progressUtils';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import './Progress.css'
 
 
 
@@ -71,39 +70,41 @@ const UserProgress = () => {
   };
 
   return (
-    <div className="container-fluid" style={{ marginTop: 100 }}>
-      <h1 className="h1">Welcome, {first_name}</h1>
-      <h3 className="h3">This is your assignment history page</h3>
-      <button id="generate-pdf-btn" onClick={handleGeneratePDF}>Generate PDF</button>
-      <button id="create-assignment-btn" onClick={handleCreateAssignmentReport}>Create Assignment</button>
+    <div className="container">
+      <div className="main">
+        <h1 className="h1">Welcome, {first_name}</h1>
+        <h3 className="h3">This is your assignment history page</h3>
+        <button id="generate-pdf-btn" onClick={handleGeneratePDF}>Generate PDF</button>
+        <button id="create-assignment-btn" onClick={handleCreateAssignmentReport}>Create Assignment</button>
 
-      <h2>Assignment Table</h2>
-      <div className="table-container">
-            <table className="assignment-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Grade</th>
-                        <th>Unit</th>
-                        <th>Lesson</th>
-                        <th>Status</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {assignment.map(assignment => (
-                        <tr key={assignment.id}>
-                            <td>{assignment.date}</td>
-                            <td>{assignment.grade}</td>
-                            <td>{assignment.unit}</td>
-                            <td>{assignment.lesson}</td>
-                            <td>{assignment.completedStatus}</td>
-                            <td>{assignment.score}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <h2>Assignment Table</h2>
+        <div className="table-container">
+              <table className="assignment-table">
+                  <thead>
+                      <tr>
+                          <th>Date</th>
+                          <th>Grade</th>
+                          <th>Unit</th>
+                          <th>Lesson</th>
+                          <th>Status</th>
+                          <th>Score</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {assignment.map(assignment => (
+                          <tr key={assignment.id}>
+                              <td>{assignment.date}</td>
+                              <td>{assignment.grade}</td>
+                              <td>{assignment.unit}</td>
+                              <td>{assignment.lesson}</td>
+                              <td>{assignment.completedStatus}</td>
+                              <td>{assignment.score}</td>
+                          </tr>
+                      ))}
+                  </tbody>
+              </table>
+          </div>
+      </div>
     </div>
   )
 }

@@ -3,11 +3,13 @@ a, a:hover{
 }
 
 nav {
+  position: fixed;
   display: flex;
-  background: #49516f;
+  background: #1c2342;
   width: 100%;
   align-items: center;
   user-select: none;
+  z-index: 1000;
 }
 
 nav a {
@@ -20,7 +22,7 @@ nav a {
 
 nav a:hover {
   color: #67a4cf;
-  background: #343a50;
+  background: #1c2342;
 }
 
 .logo {
@@ -62,7 +64,7 @@ nav a:hover {
 
 nav ul li ul.dropdown {
   width: 15rem;
-  background: #3a4058;
+  background: #232c53;
   list-style: none;
   position: absolute;
   z-index: 999;

@@ -35,35 +35,38 @@ function Dashboard() {
 
 
   return (
-  <div className="container-fluid">
-    <h5 className='h5'>Welcome, {first_name}</h5>
-    <h5 className="h5">Your ID is {user_id}</h5>
-    <h1 className="h2">My Dashboard</h1>
-    <hr/>
+  <div className="container">
+    <div className="main">
+      <h5 className='h5'>Welcome, {first_name}</h5>
+      <h5 className="h5">Your ID is {user_id}</h5>
+      <h1 className="h2">My Dashboard</h1>
+      <hr/>
 
-    <button onClick={handleCreateNotification}>Create Notification</button><br /><br />
-    <div className="notification-list-container">
-      <h2>Notifications</h2>
-      <hr />
-      <ul className="notification-list">
-          {notifications.map(notification => (
-              <li key={notification.id} className="notification-item">
-                  <span className="notification-message">{notification.message}</span>
-                  <span className="notification-date">
-                      Date: <b>{new Date(notification.notified).toLocaleString('en-US', {
-                          year: 'numeric',
-                          month: 'numeric',
-                          day: 'numeric',
-                          hour: 'numeric',
-                          minute: 'numeric',
-                      })}</b>
-                  </span>
-              </li>
-          ))}
-      </ul>
+      <button onClick={handleCreateNotification}>Create Notification</button><br /><br />
+      <div className="notification-list-container">
+        <h2>Notifications</h2>
+        <hr />
+        <ul className="notification-list">
+            {notifications.map(notification => (
+                <li key={notification.id} className="notification-item">
+                    <span className="notification-message">{notification.message}</span>
+                    <span className="notification-date">
+                        Date: <b>{new Date(notification.notified).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                        })}</b>
+                    </span>
+                </li>
+            ))}
+        </ul>
+      </div>
+      <br /><br />
+      <a href="/progress" className="button">Explore My Progress</a>
     </div>
-    <br /><br />
-    <a href="/progress" className="button">Explore My Progress</a>
+    
 
 
   </div>

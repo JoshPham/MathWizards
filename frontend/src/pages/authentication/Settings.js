@@ -77,6 +77,7 @@ function Settings() {
   };
 
   return (
+  <>
     <div className="container">
       <h1 className="h2">Settings</h1>
       <hr />
@@ -126,6 +127,7 @@ function Settings() {
         </button>
       </form>
     </div>
+  </>
   );
 }
 
