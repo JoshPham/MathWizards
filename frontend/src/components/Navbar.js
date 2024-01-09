@@ -49,7 +49,7 @@ export default function Navbar() {
                     <NavLink className="nav-link" to="/register" activeClassName="active" aria-current="page">Register</NavLink>
                   </li>
                   <li>
-                    <NavLink className="nav-link" to="/help" activeClassName="active" aria-current="page">Help Desk</NavLink>
+                    <NavLink className="nav-link" to="/about" activeClassName="active" aria-current="page">About Us</NavLink>
                   </li>
                 </Fragment>
               }
@@ -68,7 +68,7 @@ export default function Navbar() {
                     <NavLink to="/settings" activeClassName="active" style={{ cursor: 'pointer' }}>Settings</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/help" activeClassName="active" style={{ cursor: 'pointer' }}>Help Desk</NavLink>
+                    <NavLink to="/about" activeClassName="active" style={{ cursor: 'pointer' }}>About Us</NavLink>
                   </li>
                 </Fragment>
               }
