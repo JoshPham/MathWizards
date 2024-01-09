@@ -1,5 +1,6 @@
 .container{
   width: 50%;
+  box-shadow: 10px 10px 10px rgb(0, 0, 0);
 }
 
 .sub-container{
@@ -62,7 +63,7 @@ h1{
   top: 0;
   right: 0;
   height: 100%;
-  width: 49%;
+  width: 50%;
   z-index: -1;
 }
 

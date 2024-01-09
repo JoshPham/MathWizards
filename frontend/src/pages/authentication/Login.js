@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "./AuthStyles.css";
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCubes } from "@fortawesome/free-solid-svg-icons";
-import "./AuthStyles.css";
 import blue_background from './blue.png';
 const swal = require('sweetalert2');
 
@@ -68,7 +68,8 @@ function Login() {
 
   return (
     <>
-    <div className="container">
+    <img src={blue_background} alt="login form" className="auth-background-image"/>
+    <div className="auth-container">
       <div className="main">
         <form onSubmit={handleSubmit}>
           <div className="welcome">
@@ -126,11 +127,9 @@ function Login() {
               
             </div>
           </div>
-          
         </form>
       </div>
     </div>
-    <img src={blue_background} alt="login form" className="background-image"/>
     </>
   );
 }

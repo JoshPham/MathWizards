@@ -1,14 +1,17 @@
-.container{
+.auth-container{
+    padding: 0.8rem;
+    position: relative;
     width: 50%;
+    margin: auto;
+    background: #111526;
+    box-shadow: 5px 5px 10px rgb(0, 0, 0);
 }
 
-.background-image {
-    object-fit: cover;
+.auth-background-image {
     position: fixed;
+    background-size: cover;
+    width: 100%;
     top: 0;
-    right: 0;
-    height: 100%;
-    width: 49%;
     z-index: -1;
 }
 
@@ -30,11 +33,11 @@
     background: #1a2a50;
     border-style: solid;
     border-color: #000820;
-    border-radius: .5rem;
+    border-radius: 1rem;
     border-width: 0.75rem;
-    padding: 0.1rem 1rem;
     margin-bottom: 1rem;
     margin-top: 2rem;
+    padding: 0.1rem 1rem;
 }
 
 .field-title{
@@ -44,8 +47,11 @@
 }
 
 .field{
+    border: solid;
+    border-radius: .5rem;
     font-size: 2rem;
     margin-bottom: 1rem;
+    padding: .25rem;
 }
 
 .button-div{

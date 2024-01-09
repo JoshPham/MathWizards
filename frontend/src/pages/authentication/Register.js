@@ -258,7 +258,8 @@ function Register() {
 
   return (
     <>
-      <div className='container'>
+      <img src={blue_background} alt="login form" className="auth-background-image"/>
+      <div className='auth-container'>
         <div className="main">
           <form onSubmit={handleSubmit}>
             <div className="welcome">
@@ -326,7 +327,6 @@ function Register() {
           </form>
         </div>
       </div>
-      <img src={blue_background} alt="login form" className="background-image"/>
     </>
   )
 }
