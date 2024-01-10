@@ -12,10 +12,12 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Grades from './pages/grades/Grades';
 import GradePage from './pages/grades/GradePage';
+import LessonPage from './pages/grades/LessonPage';
 import NoPage from './pages/NoPage';
 import Navbar from './components/Navbar';
 import axios from 'axios';
 import './App.css';
+import HelpDesk from './pages/HelpDesk';
 
 class App extends Component {
   state = { grades: [] };
@@ -56,8 +58,10 @@ class App extends Component {
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/helpdesk" element={<HelpDesk />} />
             <Route path="/grades" element={<Grades data={this.state.grades} />} />
             <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
+            <Route path="/grades/:gradeNumber/lessons/:lessonNumber" element={<LessonPage grades={this.state.grades} />} />
             <Route path='/dashboard' element={<PrivateRoute component={Dashboard} redirectTo="/login" />} />
             <Route path='/settings' element={<PrivateRoute component={Settings} redirectTo="/login" />} />
             <Route path='/progress' element={<PrivateRoute component={UserProgress} redirectTo="/login" />} />

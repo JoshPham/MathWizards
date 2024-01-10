@@ -47,8 +47,9 @@ const GradePage = ({ grades }) => {
                       <ul className='unit-list'>
                         {Array.isArray(unit.lessons) && unit.lessons.length > 0 ? (
                           unit.lessons.map(lesson => (
-                            <li key={lesson.lesson_id}>
-                              <strong>{lesson.title}</strong>
+                            <li key={lesson.lesson_id}><NavLink to={`/grades/${gradeData.grade_id}/lessons/${lesson.lesson_id}`}>
+                            <strong>{lesson.title}</strong>
+                          </NavLink>  
                               <p>{lesson.description}</p>
                             </li>
                           ))
